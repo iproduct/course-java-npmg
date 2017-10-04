@@ -6,6 +6,8 @@ public class Person {
 	int age;
 	String address;
 
+	public Person() {}
+	
 	public Person(long ssn, String name, int age, String address) {
 		this.ssn = ssn;
 		this.name = name;
