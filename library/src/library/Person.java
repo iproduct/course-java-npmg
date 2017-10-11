@@ -2,15 +2,32 @@ package library;
 
 import java.util.Date;
 
+/**
+ * Models a physical person data
+ * @author Trayan Iliev
+ * @version 1.0.0
+ * @see java.lang.Object
+ *
+ */
 public class Person {
-	long ssn; // Social Security Number
-	String name; //null by default
-	Date birthDate;
-	String address;
+	private long ssn; // Social Security Number
+	private String name; //null by default
+	private Date birthDate;
+	private String address;
 	
+	/**
+	 * No arg constructor
+	 */
 	public Person() {
 	}
 	
+	/**
+	 * Full constructor
+	 * @param anSsn social security number
+	 * @param name person's name
+	 * @param birthDate date of birth
+	 * @param address person's address
+	 */
 	public Person(long anSsn, String name, Date birthDate, String address) {
 		ssn = anSsn;
 		this.name = name;
@@ -18,6 +35,9 @@ public class Person {
 		this.address = address;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
 		return "Person [ssn=" 

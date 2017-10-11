@@ -17,7 +17,7 @@ public class Person {
 
 	@Override
 	public String toString() {
-		return "Person [ssn=" + ssn + ", name=" + name + ", age=" + age + ", "
+		return "Person [ssn=" + String.format("%010d", ssn) + ", name=" + name + ", age=" + age + ", "
 				+ "address=" + address + "]";
 	}
 
