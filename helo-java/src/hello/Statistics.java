@@ -6,6 +6,8 @@ public class Statistics {
 		long sum = 0;
 		for (int i = 0; i < NUM_ITERATIONS; i++) {
 			double r = 0;
+			
+			//Compute avarage iterations
 			while (r < 0.99d) {
 				r = Math.random();
 				sum ++;
