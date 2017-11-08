@@ -1,7 +1,8 @@
 package store;
 
 public class User {
-	private long id;
+	private static long nextId = 0;
+	private long id = nextId++;
 	private String username;
 	private String email;
 	private String fName;
@@ -16,10 +17,8 @@ public class User {
 		this.id = id;
 	}
 
-	public User(long id, String username, String email, String fName, 
+	public User(String username, String email, String fName, 
 			String lName, String password) {
-		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.fName = fName;
@@ -28,10 +27,9 @@ public class User {
 		this.role  = Role.CUSTOMER;
 	}
 
-	public User(long id, String username, String email, String fName, 
+	public User(String username, String email, String fName, 
 			String lName, String password, Role role) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.fName = fName;
@@ -70,10 +68,12 @@ public class User {
 		"id: %s \nusername: %s\nemail: %s\nfirst: %s\nlast: %s\npassword: %s\nrole: %s\n\n", 
 			id,	username, email, fName, lName, password, role);
 	}
+	
+	
 
 	public static void main(String[] args) {
-		User user1 = new User(1, "george", "george@abv.bg", "George", "Nikolov", "george");
-		User user2 = new User(1, "petar", "petar@gmail.com", "Petar", "Atanasov", 
+		User user1 = new User("george", "george@abv.bg", "George", "Nikolov", "george");
+		User user2 = new User("petar", "petar@gmail.com", "Petar", "Atanasov", 
 				"petar123", Role.ADMIN);
 		System.out.println(user1);
 		System.out.println(user2);
