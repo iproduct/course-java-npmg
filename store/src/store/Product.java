@@ -2,7 +2,7 @@ package store;
 
 public class Product {
 	private static long counter = 0;
-	private long id = counter++;
+	private long id = Product.counter++;
 	private String name;
 	private double price;
 	private double weight;

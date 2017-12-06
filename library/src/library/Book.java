@@ -1,8 +1,8 @@
 package library;
 
 public class Book {
-	private static long counter = 0; 
-	private long id = counter++;
+	private static long counter = 1; 
+	private long id = Book.counter++;
 	private String title;
 	private String[] authors;
 	private int year;
@@ -11,12 +11,11 @@ public class Book {
 	public Book() {
 	}
 
-//	public Book(long id) {
-//		this.id = id;
-//	}
+	public Book(long id) {
+		this.id = id;
+	}
 
 	public Book(String title, String[] authors, int year, String publisher) {
-		super();
 		this.title = title;
 		this.authors = authors;
 		this.year = year;
