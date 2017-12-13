@@ -1,4 +1,4 @@
-package store;
+package store.entity;
 
 public class Product {
 	private static long counter = 0;
@@ -11,6 +11,10 @@ public class Product {
 	
 	public Product() {
 	}
+	
+	public Product(long id) {
+		this.id = id;
+	}
 
 	public Product(String name, double price) {
 		this.name = name;
@@ -18,7 +22,6 @@ public class Product {
 	}
 
 	public Product(String name, double price, double weight, String supplier, Unit unit) {
-		super();
 		this.name = name;
 		this.price = price;
 		this.weight = weight;
@@ -26,8 +29,17 @@ public class Product {
 		this.unit = unit;
 	}
 	
+	/**
+	 * Copy constructor
+	 * @param other product to be copied
+	 */
 	public Product(Product other) {
 		id = other.id;
+		name = other.name;
+		price = other.price;
+		weight = other.weight;
+		supplier = other.supplier;
+		unit = other.unit;
 	}
 	
 

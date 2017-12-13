@@ -1,4 +1,4 @@
-package store;
+package store.entity;
 
 /**
  * This class models a physical person data

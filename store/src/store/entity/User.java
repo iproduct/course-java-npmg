@@ -1,4 +1,4 @@
-package store;
+package store.entity;
 
 public class User {
 	private static long nextId = 0;
