@@ -1,6 +1,6 @@
 package store.entity;
 
-public class Product {
+public class Product implements Comparable<Product> {
 	private static long counter = 0;
 	private long id = Product.counter++;
 	private String name;
@@ -29,6 +29,54 @@ public class Product {
 		this.unit = unit;
 	}
 	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	public String getSupplier() {
+		return supplier;
+	}
+
+	public void setSupplier(String supplier) {
+		this.supplier = supplier;
+	}
+
+	public Unit getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Unit unit) {
+		this.unit = unit;
+	}
+
 	/**
 	 * Copy constructor
 	 * @param other product to be copied
@@ -55,6 +103,11 @@ public class Product {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public int compareTo(Product p2) {
+		return (int)Math.signum(getId() - p2.getId());
 	}
 
 }
