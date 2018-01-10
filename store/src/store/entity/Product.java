@@ -106,8 +106,8 @@ public class Product implements Comparable<Product> {
 	}
 
 	@Override
-	public int compareTo(Product p2) {
-		return (int)Math.signum(getId() - p2.getId());
+	public int compareTo(Product other) {
+		return (int) Math.signum(getId() - other.getId());
 	}
 
 }
