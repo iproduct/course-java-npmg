@@ -4,20 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
+	private String name;
 	private String email;
 	private String password;
-	private String role;
+	private Role role;
 	
 	public User() {
 	}
 	
-	public User(String email, String password, String role) {
+	public User(String name, String email, String password, Role role) {
 		super();
+		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.role = role;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	public String getEmail() {
 		return email;
@@ -35,11 +44,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	
@@ -77,9 +86,9 @@ public class User {
 	}
 
 	public static void main(String[] args) {
-		User user = new User("john@abv.bg", "john", "admin");
-		User user2 = new User("bill@gmail.com", "bill", "student");
-		User user3 = new User("jessica@gmail.com", "jessica", "instructor");
+		User user = new User("John Smith", "john@abv.bg", "john", Role.ADMIN);
+		User user2 = new User("Bill Gates", "bill@gmail.com", "bill", Role.STUDENT);
+		User user3 = new User("Jessika Parker", "jessica@gmail.com", "jessica", Role.INSTRUCTOR);
 		System.out.println(user);
 		
 		List<User> users = new ArrayList<User>();
