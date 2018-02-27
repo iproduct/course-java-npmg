@@ -22,17 +22,21 @@ public class Student extends User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Student [sid=").append(sid)
-				.append(", name =").append(getName())
-				.append(", email =").append(getEmail())
-				.append(", password=").append(getPassword())
-				.append(", role =").append(getRole()).append("]");
+		builder.append("Student [sid=").append(sid).append(", name =").append(getName()).append(", email =")
+				.append(getEmail()).append(", password=").append(getPassword()).append(", role =").append(getRole())
+				.append("]");
 		return builder.toString();
 	}
 
+	@Override
+	public String getWelcomeMessage() {
+		return "Welcome " + getName() + " (" + getEmail() + ") in role Student.";
+	}
+
 	public static void main(String[] args) {
-		Student s1 = new Student("Trayan Iliev", "trayan@abv.bg","trayan", 15);
+		Student s1 = new Student("Trayan Iliev", "trayan@abv.bg", "trayan", 15);
 		System.out.println(s1);
+		System.out.println(s1.getWelcomeMessage());
 
 	}
 
