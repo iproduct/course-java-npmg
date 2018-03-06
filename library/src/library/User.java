@@ -2,7 +2,7 @@ package library;
 
 import java.util.Date;
 
-abstract public class User extends Person implements CanCongratulate {
+abstract public class User extends Person implements CanCongratulate, Comparable<User> {
 	private String email;
 	private String password;
 	
@@ -37,6 +37,12 @@ abstract public class User extends Person implements CanCongratulate {
 		StringBuilder builder = new StringBuilder(super.toString());
 		builder.append("User [email=").append(email).append(", password=").append(password).append("]");
 		return builder.toString();
+	}
+	
+	//Comparable method implementation
+	@Override
+	public int compareTo(User other) {
+		return this.getName().toLowerCase().compareTo(other.getName().toLowerCase());
 	}
 	
 //	abstract public String congratulate();
