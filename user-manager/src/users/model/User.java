@@ -3,7 +3,7 @@ package users.model;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract public class User extends Object implements CanWelcome {
+abstract public class User extends Object implements CanWelcome, Comparable<User> {
 	private String name;
 	private String email;
 	private String password;
@@ -84,6 +84,12 @@ abstract public class User extends Object implements CanWelcome {
 			return false;
 		return true;
 	}
+	
+	@Override
+	public int compareTo(User other) {
+		return this.getName().compareToIgnoreCase(other.getName());
+	}
+	
 	
 //	abstract public String getWelcomeMessage();
 
