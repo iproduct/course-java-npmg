@@ -2,7 +2,7 @@ package library;
 
 import java.util.Date;
 
-abstract public class User extends Person {
+abstract public class User extends Person implements CanCongratulate {
 	private String email;
 	private String password;
 	
@@ -39,7 +39,7 @@ abstract public class User extends Person {
 		return builder.toString();
 	}
 	
-	abstract public String congratulate();
+//	abstract public String congratulate();
 		
 //	public static void main(String[] args) {
 //		User u = new User();

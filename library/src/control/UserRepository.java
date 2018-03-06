@@ -5,12 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 import library.Admin;
+import library.CanCongratulate;
 import library.Client;
 import library.Librarian;
 import library.User;
 
 public class UserRepository {
-	private List<User> users = new ArrayList<User>();
+	private List<CanCongratulate> users = new ArrayList<CanCongratulate>();
 
 	public static void main(String[] args) {
 		User c1 = new Client(11111111111L, "John Smith", new Date(), "London", "john@gmail.com", "john");
@@ -24,7 +25,7 @@ public class UserRepository {
 		repo.users.add(l1);
 		repo.users.add(a1);
 		
-		for(User u: repo.users) {
+		for(CanCongratulate u: repo.users) {
 			System.out.println(u.congratulate());
 		}
 		
