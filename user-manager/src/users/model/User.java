@@ -3,7 +3,7 @@ package users.model;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract public class User {
+abstract public class User extends Object implements CanWelcome {
 	private String name;
 	private String email;
 	private String password;
@@ -85,7 +85,7 @@ abstract public class User {
 		return true;
 	}
 	
-	abstract public String getWelcomeMessage();
+//	abstract public String getWelcomeMessage();
 
 //	public static void main(String[] args) {
 //		User user = new User("John Smith", "john@abv.bg", "john", Role.ADMIN);
