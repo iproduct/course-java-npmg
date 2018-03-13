@@ -13,7 +13,7 @@ import library.User;
 
 public class UserRepository {
 //	private List<CanCongratulate> users = new ArrayList<CanCongratulate>();
-	private User [] users;
+	private User[] users;
 
 	public static void main(String[] args) {
 		User c1 = new Client(11111111111L, "John Smith", new Date(), "London", "john@gmail.com", "john");
@@ -30,6 +30,11 @@ public class UserRepository {
 		repo.users = new User[] {c1, c2, l1, a1};
 		
 		Arrays.sort(repo.users);
+		int index = Arrays.binarySearch(repo.users, 
+				new Client(0, "Ivan Perov",null,"","", ""));
+		
+		System.out.println(index + ": " + 
+				(index >= 0 ? repo.users[index]: ""));
 		
 		for(CanCongratulate u: repo.users) {
 			System.out.println(u.congratulate());

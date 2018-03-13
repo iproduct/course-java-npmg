@@ -84,7 +84,7 @@ public class Person {
 		if (getClass() != obj.getClass())
 			return false;
 		Person other = (Person) obj;
-		if (ssn != other.ssn)
+		if (name != other.name)
 			return false;
 		return true;
 	}
