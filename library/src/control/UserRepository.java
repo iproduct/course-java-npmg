@@ -30,15 +30,18 @@ public class UserRepository {
 		repo.users = new User[] {c1, c2, l1, a1};
 		
 		Arrays.sort(repo.users);
+		
+		for(CanCongratulate u: repo.users) {
+			System.out.println(u.congratulate());
+		}
+		
 		int index = Arrays.binarySearch(repo.users, 
 				new Client(0, "Ivan Perov",null,"","", ""));
 		
 		System.out.println(index + ": " + 
 				(index >= 0 ? repo.users[index]: ""));
 		
-		for(CanCongratulate u: repo.users) {
-			System.out.println(u.congratulate());
-		}
+		
 		
 	}
 
