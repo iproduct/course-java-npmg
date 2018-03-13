@@ -10,7 +10,6 @@ public class Instructor extends User {
 		super(name, email, password, Role.INSTRUCTOR);
 	}
 
-	@Override
 	public String getWelcomeMessage() {
 		return "Welcome " + getName() + " (" + getEmail() + ") in role Instructor.";
 	}

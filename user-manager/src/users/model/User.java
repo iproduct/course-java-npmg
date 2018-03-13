@@ -3,7 +3,7 @@ package users.model;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract public class User extends Object implements CanWelcome, Comparable<User> {
+public class User extends Object implements Comparable<User> {
 	private String name;
 	private String email;
 	private String password;
@@ -55,8 +55,10 @@ abstract public class User extends Object implements CanWelcome, Comparable<User
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [email=").append(email).append(", password=").append(password).append(", role=")
-				.append(role).append("]");
+		builder.append("User [name=").append(name)
+		.append(", email=").append(email)
+		.append(", password=").append(password)
+		.append(", role=").append(role).append("]");
 		return builder.toString();
 	}
 
@@ -74,13 +76,13 @@ abstract public class User extends Object implements CanWelcome, Comparable<User
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (obj.getClass().equals(this.getClass()))
 			return false;
 		User other = (User) obj;
-		if (email == null) {
-			if (other.email != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!email.equals(other.email))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

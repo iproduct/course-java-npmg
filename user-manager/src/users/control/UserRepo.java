@@ -19,9 +19,9 @@ public class UserRepo {
 		users.add(user);
 	}
 	
-	public void welcomeAll() {
-		for(CanWelcome user: users) {
-			System.out.println(user.getWelcomeMessage());
+	public void print() {
+		for(User user: users) {
+			System.out.println(user);
 		}
 	}
 
@@ -30,7 +30,7 @@ public class UserRepo {
 		
 		User user1 = new Admin("John Smith", "john@abv.bg", "john");
 		User user2 = new Student("Bill Gates", "gates.bill@gmail.com", "bill", 12);
-		User user3 = new Student("Ivan Petrov", "ivan@gmail.com", "ivan", 12);
+		User user3 = new Student("Ivan Petrov", "aivan@gmail.com", "ivan", 12);
 		User user4 = new Instructor("Jessika Parker", "smith.jessica@gmail.com", "jessica");
 			
 		repo.addUser(user1);
@@ -38,14 +38,18 @@ public class UserRepo {
 		repo.addUser(user3);
 		repo.addUser(user4);
 		
-		repo.users.sort(new UserEmailComparator());
+		repo.users.sort(null);
+		repo.print();
+		
+		int index = repo.users.indexOf(
+				new User("Ivan Petrov", null, null, null));
+		System.out.println(index + ": " + repo.users.get(index));
 		
 //		repo.users = new User[] { user1, user2, user3, user4 };
 		
 //		Arrays.sort(repo.users , new UserEmailComparator());
 		//		(u1,u2) -> u1.getEmail().compareToIgnoreCase(u2.getEmail()));
 		
-		repo.welcomeAll();
 
 	}
 

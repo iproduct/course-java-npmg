@@ -9,7 +9,7 @@ public class Admin extends User {
 		super(name, email, password, Role.ADMIN);
 	}
 
-	@Override
+	
 	public String getWelcomeMessage() {
 		return "Welcome " + getName() + " (" + getEmail() + ") in role Admin.";
 	}
