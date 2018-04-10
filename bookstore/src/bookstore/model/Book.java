@@ -118,6 +118,7 @@ public class Book implements Comparable<Book> {
 	@Override
 	public int compareTo(Book other) {
 		return this.title.compareToIgnoreCase(other.title);
+//		return (int) Math.signum(this.price - other.price);
 	}
 
 	public static void main(String[] args) {
