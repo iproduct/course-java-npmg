@@ -83,6 +83,7 @@ public class MainFrame extends JFrame {
 		container.add(panel);
 	}
 
+
 	public static void main(String[] args) {
 		new MainFrame();
 
