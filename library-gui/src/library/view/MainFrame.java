@@ -1,5 +1,6 @@
 package library.view;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -22,8 +23,10 @@ class ShowButtonListener implements ActionListener {
 public class MainFrame extends JFrame {
 	private JLabel label;
 	private JTextField jtfTitle = new JTextField(20);
-	private JPanel panel = new JPanel();
-	private JButton btnShow = new JButton("Show Books");
+	private JPanel buttonPanel = new JPanel();
+	private JButton btnSubmit = new JButton("Submit");
+	private JButton btnReset = new JButton("Reset");
+	private JButton btnCancel = new JButton("Cancel");
 
 	public MainFrame() throws HeadlessException {
 		super("Library Manager");
@@ -32,8 +35,15 @@ public class MainFrame extends JFrame {
 		add(BorderLayout.NORTH, new JButton("Main Menu"));
 		add(BorderLayout.WEST, new JButton("West"));
 		add(BorderLayout.EAST, new JButton("East"));
-		add(BorderLayout.SOUTH, btnShow);
-		btnShow.addActionListener(new ChangeLabelListener());
+		
+		//Build buttonPanel
+		buttonPanel.setLayout(new FlowLayout());
+		buttonPanel.add(btnSubmit);
+		buttonPanel.add(btnReset);
+		buttonPanel.add(btnCancel);
+		add(BorderLayout.SOUTH, buttonPanel);
+		
+		btnSubmit.addActionListener(new ChangeLabelListener());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
