@@ -19,7 +19,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+
+import library.model.Book;
 
 class ChangeButtonTextListener implements ActionListener {
 	@Override
@@ -35,14 +38,33 @@ public class MainFrame extends JFrame {
 	private JTextField jtfPublisher = new JTextField(20);
 	private JButton btnAddBook = new JButton("Add Book");
 	private boolean isOddMessage = false;
-	private JPanel mainPanel = new JPanel();
+	private JPanel mainPanel = new JPanel();	
+	private JPanel buttonPanel = new JPanel();
+	private JButton btnSubmit = new JButton("Submit");
+	private JButton btnReset = new JButton("Reset");
+	private JButton btnCancel = new JButton("Cancel");
 
-	private class ChangeLabelTextListener implements ActionListener {
+	private class AddBookListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			isOddMessage = !isOddMessage;
-			// lblTitle.setText(isOddMessage ? "Welcome again !!!": "Welcome to Library
-			// Manager!");
+			Book book = new Book();
+			boolean error = false;
+			book.setTitle(jtfTitle.getText());
+			String[] authors = jtfAuthors.getText().split(",");
+			for(int i = 0; i < authors.length; i++) {
+				authors[i] = authors[i].trim();
+			}
+			book.setAuthors(authors);
+			book.setPublisher(jtfPublisher.getText());
+			try {
+				book.setYear(Integer.parseInt(jtfYear.getText()));
+			} catch (NumberFormatException ex)  {
+				jtfYear.setBorder(new LineBorder(Color.RED));
+				error = true;
+			}
+			if(error) return;
+			jtfYear.setBorder(new LineBorder(Color.GRAY));
+			
 		}
 	}
 
@@ -53,27 +75,35 @@ public class MainFrame extends JFrame {
 
 		mainPanel.setLayout(new GridLayout(4, 2));
 		mainPanel.setBorder(new MatteBorder(30, 30, 30, 30, new Color(0, 0, 0, 0)));
-		addField("Title: ", jtfTitle, mainPanel);
-		addField("Authors: ", jtfAuthors, mainPanel);
-		addField("Year: ", jtfYear, mainPanel);
-		addField("Publisher: ", jtfPublisher, mainPanel);
+		makeField("Title: ", jtfTitle, mainPanel);
+		makeField("Authors: ", jtfAuthors, mainPanel);
+		makeField("Year: ", jtfYear, mainPanel);
+		makeField("Publisher: ", jtfPublisher, mainPanel);
 
 		add(mainPanel);
+		
+		buttonPanel.add(btnSubmit);
+		buttonPanel.add(btnReset);
+		buttonPanel.add(btnCancel);
+		add(BorderLayout.SOUTH, buttonPanel);
 
-		btnAddBook.addActionListener(new ChangeLabelTextListener());
+		btnSubmit.addActionListener(new AddBookListener());
 
-		add(BorderLayout.SOUTH, btnAddBook);
-		add(BorderLayout.WEST, new JButton("West"));
-		add(BorderLayout.EAST, new JButton("East"));
-		add(BorderLayout.NORTH, new JButton("North"));
+		
+		
+		
+		
+//		add(BorderLayout.WEST, new JButton("West"));
+//		add(BorderLayout.EAST, new JButton("East"));
+//		add(BorderLayout.NORTH, new JButton("North"));
 
 		// setBounds(new Rectangle(300, 200, 600, 400));
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 
-	private void addField(String label, JComponent component, Container container) {
-		container.add(new JLabel(label));
+	private void makeField(String labelText, JComponent component, Container container) {
+		container.add(new JLabel(labelText));
 		Box panel = Box.createVerticalBox();
 		panel.add(Box.createVerticalGlue());
 		component.setMaximumSize(new Dimension(500, 20));
