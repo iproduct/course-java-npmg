@@ -1,7 +1,9 @@
 package library.view;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
@@ -9,19 +11,19 @@ import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.MatteBorder;
 
-class ShowButtonListener implements ActionListener {
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		((JButton)e.getSource()).setText("New text");	
-	}
-}
+import library.model.Book;
+
+
 
 public class MainFrame extends JFrame {
 	private JLabel label;
@@ -34,6 +36,18 @@ public class MainFrame extends JFrame {
 	private JTextField jtfAuthors = new JTextField(20);
 	private JTextField jtfPublisher = new JTextField(20);
 	private JTextField jtfYear = new JTextField(20);
+	
+	private class AddBookListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Book book = new Book();
+			book.setTitle(jtfTitle.getText());
+			book.setAuthors(jtfAuthors.getText());
+			book.setPublisher(jtfPublisher.getText());
+			book.setYear(Integer.parseInt(jtfYear.getText()));
+			System.out.println(book);
+		}
+	}
 
 	public MainFrame() throws HeadlessException {
 		super("Library Manager");
@@ -51,13 +65,14 @@ public class MainFrame extends JFrame {
 		
 		//Build mainPanel
 		mainPanel.setLayout(new GridLayout(4,2));
+		mainPanel.setBorder(new MatteBorder(10, 20, 10, 20, new Color(0, 0, 0, 0)));
 		makeField("Title:", jtfTitle, mainPanel);
 		makeField("Authors:", jtfAuthors, mainPanel);
 		makeField("Publisher:", jtfPublisher, mainPanel);
 		makeField("Year:", jtfYear, mainPanel);
 		add(mainPanel);
 		
-		btnSubmit.addActionListener(new ChangeLabelListener());
+		btnSubmit.addActionListener(new AddBookListener());
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
@@ -74,8 +89,13 @@ public class MainFrame extends JFrame {
 	}
 	
 	private void makeField(String fieldName, Component component, Container container) {
+		Box panel = Box.createVerticalBox();
+		panel.add(Box.createVerticalGlue());
+		component.setMaximumSize(new Dimension(500, 20));
+		panel.add(component);
+		panel.add(Box.createVerticalGlue());
 		container.add(new JLabel(fieldName));
-		container.add(component);
+		container.add(panel);
 	}
 
 	public static void main(String[] args) {
