@@ -64,6 +64,7 @@ public class MainFrame extends JFrame {
 			}
 			if(error) return;
 			jtfYear.setBorder(new LineBorder(Color.GRAY));
+			System.out.println(book);
 			
 		}
 	}

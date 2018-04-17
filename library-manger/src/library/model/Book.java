@@ -1,5 +1,7 @@
 package library.model;
 
+import java.util.Arrays;
+
 public class Book {
 	private static long counter = 1; 
 	private long id = Book.counter++;
@@ -70,6 +72,17 @@ public class Book {
 		this.publisher = publisher;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Book [id=").append(id)
+		.append(", title=").append(title)
+		.append(", authors=").append(Arrays.toString(authors))
+		.append(", year=").append(year).append(", publisher=")
+		.append(publisher).append("]");
+		return builder.toString();
+	}
+
 	public static void main(String[] args) {
 		Book b1 = new Book();
 		Book b2 = new Book(25);
@@ -77,8 +90,6 @@ public class Book {
 		System.out.println(b1.id);
 		System.out.println(b2.id);
 		System.out.println(b3.id);
-		
-
 	}
 
 }
