@@ -54,6 +54,7 @@ public class MainFrame extends JFrame {
 			} catch (NumberFormatException ex) {
 				jtfYear.setBorder(new LineBorder(Color.RED));
 			}
+			jtaResults.append(book.toString() + "\n");
 			System.out.println(book);
 		}
 	}
@@ -83,6 +84,7 @@ public class MainFrame extends JFrame {
 		btnSubmit.addActionListener(new AddBookListener());
 		
 		//Results panel
+		jtaResults.setEditable(false);
 		resultsPanel.add(jtaResults);
 		centralPanel.add(mainPanel);
 		centralPanel.add(resultsPanel);

@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -43,6 +44,9 @@ public class MainFrame extends JFrame {
 	private JButton btnSubmit = new JButton("Submit");
 	private JButton btnReset = new JButton("Reset");
 	private JButton btnCancel = new JButton("Cancel");
+	private Box centralPanel = Box.createVerticalBox();
+	private JPanel resultsPanel = new JPanel();
+	private JTextArea jtaResults = new JTextArea(15, 60);
 
 	private class AddBookListener implements ActionListener {
 		@Override
@@ -65,14 +69,22 @@ public class MainFrame extends JFrame {
 			if(error) return;
 			jtfYear.setBorder(new LineBorder(Color.GRAY));
 			System.out.println(book);
-			
+			jtaResults.append(book.toString() + "\n");
+			resetFields();
+		}
+	}
+	
+	private class ResetFormListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			resetFields();
 		}
 	}
 
 	public MainFrame() throws HeadlessException {
 		super("Library Manager");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(600, 400);
+		setSize(700, 400);
 
 		mainPanel.setLayout(new GridLayout(4, 2));
 		mainPanel.setBorder(new MatteBorder(30, 30, 30, 30, new Color(0, 0, 0, 0)));
@@ -80,8 +92,6 @@ public class MainFrame extends JFrame {
 		makeField("Authors: ", jtfAuthors, mainPanel);
 		makeField("Year: ", jtfYear, mainPanel);
 		makeField("Publisher: ", jtfPublisher, mainPanel);
-
-		add(mainPanel);
 		
 		buttonPanel.add(btnSubmit);
 		buttonPanel.add(btnReset);
@@ -89,8 +99,14 @@ public class MainFrame extends JFrame {
 		add(BorderLayout.SOUTH, buttonPanel);
 
 		btnSubmit.addActionListener(new AddBookListener());
+		btnReset.addActionListener(new ResetFormListener());
 
+		centralPanel.add(mainPanel);
+		centralPanel.add(resultsPanel);
+		resultsPanel.add(jtaResults);
+		jtaResults.setEditable(false);
 		
+		add(centralPanel);
 		
 		
 		
@@ -114,6 +130,12 @@ public class MainFrame extends JFrame {
 		container.add(panel);
 	}
 
+	private void resetFields() {
+		jtfTitle.setText("");
+		jtfAuthors.setText("");
+		jtfYear.setText("");
+		jtfPublisher.setText("");
+	}
 
 	public static void main(String[] args) {
 		new MainFrame();
