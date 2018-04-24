@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import library.model.Book;
@@ -44,7 +45,11 @@ public class MainFrame extends JFrame {
 			book.setTitle(jtfTitle.getText());
 			book.setAuthors(jtfAuthors.getText());
 			book.setPublisher(jtfPublisher.getText());
-			book.setYear(Integer.parseInt(jtfYear.getText()));
+			try {
+				book.setYear(Integer.parseInt(jtfYear.getText()));
+			} catch (NumberFormatException ex) {
+				jtfYear.setBorder(new LineBorder(Color.RED));
+			}
 			System.out.println(book);
 		}
 	}
@@ -53,8 +58,8 @@ public class MainFrame extends JFrame {
 		super("Library Manager");
 		
 		add(BorderLayout.NORTH, new JButton("Main Menu"));
-		add(BorderLayout.WEST, new JButton("West"));
-		add(BorderLayout.EAST, new JButton("East"));
+//		add(BorderLayout.WEST, new JButton("West"));
+//		add(BorderLayout.EAST, new JButton("East"));
 		
 		//Build buttonPanel
 		buttonPanel.setLayout(new FlowLayout());
@@ -65,7 +70,7 @@ public class MainFrame extends JFrame {
 		
 		//Build mainPanel
 		mainPanel.setLayout(new GridLayout(4,2));
-		mainPanel.setBorder(new MatteBorder(10, 20, 10, 20, new Color(0, 0, 0, 0)));
+		mainPanel.setBorder(new MatteBorder(20, 50, 20, 50, new Color(0, 0, 0, 0)));
 		makeField("Title:", jtfTitle, mainPanel);
 		makeField("Authors:", jtfAuthors, mainPanel);
 		makeField("Publisher:", jtfPublisher, mainPanel);
