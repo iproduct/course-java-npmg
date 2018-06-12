@@ -1,8 +1,29 @@
 package bookstore.jdbc;
 
 import java.sql.*;
+import java.util.List;
+
+import bookstore.model.Book;
+
 
 public class SQLiteJDBC {
+	private Connection connection;
+	
+	public Connection getConnection() throws ClassNotFoundException, SQLException {
+		if(connection != null) {
+			return connection;
+		} else {
+			Class.forName("org.sqlite.JDBC");
+			connection = DriverManager.getConnection("jdbc:sqlite:bookstore.db");
+			System.out.println("Opened database successfully");
+			return connection;
+		}
+	}
+	
+	public List<Book> getBooks() {
+		return null;
+	}
+
 	public static void main(String args[]) {
 		Connection c = null;
 		try {
@@ -40,10 +61,10 @@ public class SQLiteJDBC {
 	        
 	        while(results.next()) {
 	        	System.out.printf("%d: %s - %s (%d) \n", 
-	        			results.getInt(1),
-	        			results.getString(3),
-	        			results.getString(2),
-	        			results.getInt(5)
+	        			results.getInt("ID"),
+	        			results.getString("TITLE"),
+	        			results.getString("AUTHORS"),
+	        			results.getInt("YEAR")
 	        	);
 	        }
 	        

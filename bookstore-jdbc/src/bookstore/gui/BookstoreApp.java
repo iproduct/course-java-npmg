@@ -2,10 +2,14 @@ package bookstore.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bookstore.jdbc.SQLiteJDBC;
+
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 
@@ -48,11 +52,21 @@ public class BookstoreApp extends JFrame {
 		
 		String[] columns = {"ID", "TITLE", "AUTHORS", "YEAR", "PUBLISHER", "PRICE"};
 		
-		Object[][] data = {
-				{1, "Thinking in Java", "Bruce Eckel", 2012, "Prentice Hall", 35.50},
-				{2, "Thinking in Java", "Bruce Eckel", 2012, "Prentice Hall", 35.50},
-				{3, "Thinking in Java", "Bruce Eckel", 2012, "Prentice Hall", 35.50}
-		};
+		SQLiteJDBC jdbcController = new SQLiteJDBC();
+		
+		Object[][] data = null;
+		try {
+			data = jdbcController.getData();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		Object[][] data = {
+//				{1, "Thinking in Java", "Bruce Eckel", 2012, "Prentice Hall", 35.50},
+//				{2, "Thinking in Java", "Bruce Eckel", 2012, "Prentice Hall", 35.50},
+//				{3, "Thinking in Java", "Bruce Eckel", 2012, "Prentice Hall", 35.50}
+//		};
 		
 		table = new JTable(data, columns);
 		scrollPane.setViewportView(table);

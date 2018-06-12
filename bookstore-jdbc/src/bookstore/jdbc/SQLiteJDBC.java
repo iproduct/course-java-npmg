@@ -3,9 +3,57 @@ package bookstore.jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class SQLiteJDBC {
+	private Connection connection;
+	
+	public Connection getConnection() {
+		if(connection != null) {
+			return connection;
+		} else {
+			try {
+				Class.forName("org.sqlite.JDBC");
+				connection = DriverManager.getConnection("jdbc:sqlite:bookstore.db");
+				return connection;
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+	
+	public Object[][] getData() throws SQLException {
+		Connection con =  getConnection();
+		Statement stmt = con.createStatement();
+		
+		// Get BOOKS table row count 
+		ResultSet r = stmt.executeQuery("SELECT COUNT(*) AS rowcount FROM BOOKS");
+		r.next();
+		int rowCount = r.getInt("rowcount");
+		r.close();
+		
+		// Select all books
+		String sql = "SELECT * FROM BOOKS";
+		ResultSet rs = stmt.executeQuery(sql);
+		int columnCount = rs.getMetaData().getColumnCount();
+		
+		Object[][] data = new Object[rowCount][columnCount];
+		
+		int row = 0;
+		while(rs.next()) {
+			for(int i = 0; i < columnCount; i++) {
+				data[row][i] = rs.getObject(i+1);
+			}
+			row++;
+		}
+		
+		return data;
+	}
+	
 	public static void main(String args[]) {
 		Connection c = null;
 
