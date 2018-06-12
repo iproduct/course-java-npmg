@@ -13,43 +13,30 @@ public class SQLiteJDBC {
 			c = DriverManager.getConnection("jdbc:sqlite:bookstore.db");
 
 			Statement stmt = c.createStatement();
-			String sql = "DROP TABLE IF EXISTS COMPANY ";
+			String sql = "DROP TABLE IF EXISTS BOOKS ";
 			stmt.executeUpdate(sql);
 		
-			sql = "CREATE TABLE COMPANY " 
-					+ "(ID INT PRIMARY KEY     NOT NULL,"
-					+ " NAME           TEXT    NOT NULL, " 
-					+ " AGE            INT     NOT NULL, "
-					+ " ADDRESS        CHAR(50), " 
-					+ " SALARY         REAL)";
+			sql = "CREATE TABLE BOOKS " 
+					+ "(ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
+					+ " TITLE      CHAR(120)  NOT NULL, " 
+					+ " AUTHORS    CHAR(120)  NOT NULL, " 
+					+ " YEAR       INT, "
+					+ " PUBLISHER  CHAR(80), " 
+					+ " PRICE     REAL)";
 			stmt.executeUpdate(sql);
 		
-			c.setAutoCommit(false);
-			System.out.println("Opened database successfully");
+			System.out.println("Opened database successfully.");
 			
-//			String sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-//			    "VALUES (1, 'Paul', 32, 'California', 20000.00 );"; 
-//			stmt.executeUpdate(sql);
-//			
-//			 sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-//			  "VALUES (2, 'Allen', 25, 'Texas', 15000.00 );"; 
-//			 stmt.executeUpdate(sql);
-//			
-//			 sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-//			  "VALUES (3, 'Teddy', 23, 'Norway', 20000.00 );"; 
-//			 stmt.executeUpdate(sql);
-//			
-//			 sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
-//			  "VALUES (4, 'Mark', 25, 'Rich-Mond ', 65000.00 );"; 
-//			 stmt.executeUpdate(sql);
+			sql = "INSERT INTO BOOKS (TITLE, AUTHORS, YEAR, PUBLISHER, PRICE)" +
+			    " VALUES ('Thinking in Java', 'Bruce Eckel', 2012, 'Prentice Hall', 35.50)";
+			stmt.executeUpdate(sql);
 			
-			 stmt.close();
-			 c.commit();
-			 c.close();
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
-		System.out.println("Opened database successfully");
+		System.out.println("Finishing program.");
 	}
 }
