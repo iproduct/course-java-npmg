@@ -1,6 +1,7 @@
 package bookstore.jdbc;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import bookstore.model.Book;
@@ -21,7 +22,29 @@ public class SQLiteJDBC {
 	}
 	
 	public List<Book> getBooks() {
-		return null;
+		List<Book> books = new ArrayList<>();
+		try {
+			Connection connnection = getConnection();
+			Statement stmt = connection.createStatement();
+			String sql= "SELECT * FROM BOOK;";
+	        ResultSet rs = stmt.executeQuery(sql);
+	        
+	        while(rs.next()) {
+	        	Book b = new Book();
+	        	b.setId(rs.getInt("ID"));
+	        	b.setTitle(rs.getString("TITLE"));
+	        	b.setAuthors(rs.getString("AUTHORS"));
+	        	b.setYear(rs.getInt("YEAR"));
+	        	b.setPublisher(rs.getString("PUBLISHER"));
+	        	b.setPrice(rs.getDouble("PRICE"));
+	        	books.add(b);
+	        	System.out.print(b);
+	        }
+	        
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return books;
 	}
 
 	public static void main(String args[]) {
